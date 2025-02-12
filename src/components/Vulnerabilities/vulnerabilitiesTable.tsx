@@ -8,27 +8,27 @@ const VulnerabilitiesTable = ({ vulnerabilities }: Props) => {
   console.log({ vulnerabilities });
 
   return (
-    <div className="border border-gray-200 rounded-md shadow-sm overflow-hidden mb-10">
-      <table className="w-full">
-        <thead className="bg-black">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-200 mb-6">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-950 ">
+        <thead className="text-xs text-white uppercase bg-gray-600 ">
           <tr className="">
-            <th className="w-[260px] px-10 py-3 text-left text-xs font-medium text-white uppercase">
+            <th scope="col" className="px-6 py-3 w-[200px]">
               Id
             </th>
-            <th className="w-[100px] px-6 py-3 text-left text-xs font-medium text-white uppercase">
+            <th scope="col" className="px-6 py-3 w-[140px]">
               Name
             </th>
-            <th className="w-[100px] px-6 py-3 text-left text-xs font-medium text-white uppercase">
+            <th scope="col" className="px-6 py-3 w-[140px]">
               Version
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">
+            <th scope="col" className="px-6 py-3">
               Affected Versions
             </th>
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+        <tbody>
           {vulnerabilities.vulnerabilities.map((item, index) => (
-            <tr key={index}>
+            <tr key={index} className="bg-white dark:bg-gray-800">
               <td className="px-6 py-4">{item.id}</td>
               <td className="px-6 py-4">{item.affected[0].package.name}</td>
               <td className="px-6 py-4">
