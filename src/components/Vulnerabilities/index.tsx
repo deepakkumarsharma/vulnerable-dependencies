@@ -14,9 +14,7 @@ const Vulnerabilities = () => {
     );
   }
 
-  console.log({ vulnerabilities });
-
-  return <VulnerabilitiesList />;
+  return <VulnerabilitiesList vulnerabilities={vulnerabilities} />;
 };
 
 export default Vulnerabilities;
