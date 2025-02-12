@@ -11,30 +11,29 @@ app.post("/api/dependencies-checker", async (req, res) => {
     const result = [];
     const dependencies = req.body;
 
-    console.log({ req: req.body });
-
     for (const [name, version] of Object.entries(dependencies)) {
+      if (!name || !version) continue;
+
       const response = await axios.post("https://api.osv.dev/v1/query", {
         package: {
           name,
-          ecosystem: "npm",
         },
         version,
       });
 
-      if (response?.data && response?.data?.vulnerabilities) {
+      if (response?.data?.vulns?.length > 0) {
         result.push({
           name,
           version,
-          vulnerabilities: response?.data?.vulnerabilities,
+          vulnerabilities: response?.data?.vulns,
         });
       }
     }
 
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ error: "Failed to check vulnerabilities" });
+    return res.status(500).json({ error: "Failed to check vulnerabilities" });
   }
 });
 

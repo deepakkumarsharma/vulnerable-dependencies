@@ -1,0 +1,12 @@
+{
+  "name": "osv-vulnerability-test",
+  "version": "1.0.0",
+  "description": "Test OSV Scanner - DO NOT USE IN PRODUCTION",
+  "main": "index.js",
+  "dependencies": {
+    "mruby": "2.1.2rc"
+  },
+  "devDependencies": {
+    "@types/axios": "^1.4.0"
+  }
+}
