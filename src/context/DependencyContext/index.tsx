@@ -7,7 +7,6 @@ type Props = {
 
 const DependencyContextProvider = ({ children }: Props) => {
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [dependencies, setDependencies] = useState<Record<string, string>>({});
   const [devDependencies, setDevDependencies] = useState<
     Record<string, string>
@@ -16,21 +15,17 @@ const DependencyContextProvider = ({ children }: Props) => {
   const value = useMemo(() => {
     return {
       error,
-      isLoading,
       dependencies,
       devDependencies,
       setError,
-      setIsLoading,
       setDependencies,
       setDevDependencies,
     };
   }, [
     error,
-    isLoading,
     dependencies,
     devDependencies,
     setError,
-    setIsLoading,
     setDependencies,
     setDevDependencies,
   ]);

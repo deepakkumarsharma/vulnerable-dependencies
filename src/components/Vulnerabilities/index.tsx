@@ -1,36 +1,20 @@
-import { useCallback, useEffect, useState } from "react";
-import { useDependenciesContext } from "../../context/DependencyContext/useDependenciesContext";
-import { checkDependencyVulnerability } from "../../services/osvService";
-import { filteredDependencies } from "../../utils/filteredDependencies";
+import VulnerabilitiesList from "./vulnerabilitiesList";
+import { useFetchVulnerabilities } from "../../hooks/fetchVulnerabilities";
 
 const Vulnerabilities = () => {
-  const [vulnerabilities, setVulnerabilities] = useState([]);
-  const { dependencies, devDependencies } = useDependenciesContext();
+  const { loading, vulnerabilities } = useFetchVulnerabilities();
 
-  const fetchVulnerabilities = useCallback(async () => {
-    const allDependencies = {
-      ...dependencies,
-      ...devDependencies,
-    };
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center mt-10">
+        <div className="text-2xl font-bold">
+          Checking for vulnerabilities...
+        </div>
+      </div>
+    );
+  }
 
-    try {
-      const result = filteredDependencies(allDependencies);
-      const vulnerabilities = await checkDependencyVulnerability({
-        dependencies: result,
-      });
-      setVulnerabilities(vulnerabilities);
-    } catch (error) {
-      console.error("Error fetching vulnerabilities", error);
-    }
-  }, [dependencies, devDependencies]);
-
-  useEffect(() => {
-    fetchVulnerabilities();
-  }, [fetchVulnerabilities]);
-
-  console.log({ vulnerabilities });
-
-  return <div>Vulnerabilities</div>;
+  return <VulnerabilitiesList vulnerabilities={vulnerabilities} />;
 };
 
 export default Vulnerabilities;

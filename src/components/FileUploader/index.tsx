@@ -4,7 +4,7 @@ import { Paperclip } from "lucide-react";
 import { useDependenciesContext } from "../../context/DependencyContext/useDependenciesContext";
 
 const FileUploader = () => {
-  const { setError, setIsLoading, setDependencies, setDevDependencies } =
+  const { setError, setDependencies, setDevDependencies } =
     useDependenciesContext();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,18 +19,14 @@ const FileUploader = () => {
 
         if (!content) return;
         try {
-          setIsLoading(true);
           const { dependencies, devDependencies } = JSON.parse(
             content as string
           );
-          setDependencies(dependencies);
-          setDevDependencies(devDependencies);
+          setDependencies(dependencies || {});
+          setDevDependencies(devDependencies || {});
         } catch (error) {
-          setIsLoading(false);
           setError("Invalid package.json file");
           console.error("Invalid package.json file", error);
-        } finally {
-          setIsLoading(false);
         }
       };
       reader.readAsText(file);
