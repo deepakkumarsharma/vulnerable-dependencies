@@ -13,8 +13,6 @@ const DependencyContextProvider = ({ children }: Props) => {
     Record<string, string>
   >({});
 
-  console.log({ isLoading, dependencies, devDependencies });
-
   const value = useMemo(() => {
     return {
       error,

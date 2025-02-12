@@ -16,7 +16,7 @@ const FileUploader = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const content = e.target?.result;
-        console.log(content);
+
         if (!content) return;
         try {
           setIsLoading(true);
