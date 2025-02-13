@@ -5,8 +5,6 @@ type Props = {
 };
 
 const VulnerabilitiesTable = ({ vulnerabilities }: Props) => {
-  console.log({ vulnerabilities });
-
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-200 mb-6">
       <table className="w-full text-sm text-left rtl:text-right text-gray-950 ">
@@ -18,8 +16,8 @@ const VulnerabilitiesTable = ({ vulnerabilities }: Props) => {
             <th scope="col" className="px-6 py-3 w-[140px]">
               Name
             </th>
-            <th scope="col" className="px-6 py-3 w-[140px]">
-              Version
+            <th scope="col" className="px-2 py-3 w-[160px]">
+              Package Version
             </th>
             <th scope="col" className="px-6 py-3">
               Affected Versions
@@ -31,9 +29,7 @@ const VulnerabilitiesTable = ({ vulnerabilities }: Props) => {
             <tr key={index} className="bg-white">
               <td className="px-6 py-4">{item.id}</td>
               <td className="px-6 py-4">{item.affected[0].package.name}</td>
-              <td className="px-6 py-4">
-                {item.affected[0].package.ecosystem}
-              </td>
+              <td className="px-6 py-4">{vulnerabilities.version}</td>
               <td className="px-6 py-4">
                 {item.affected[0].versions.join(", ")}
               </td>
