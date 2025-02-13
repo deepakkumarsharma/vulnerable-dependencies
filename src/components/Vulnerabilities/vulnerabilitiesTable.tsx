@@ -28,7 +28,7 @@ const VulnerabilitiesTable = ({ vulnerabilities }: Props) => {
         </thead>
         <tbody>
           {vulnerabilities.vulnerabilities.map((item, index) => (
-            <tr key={index} className="bg-white dark:bg-gray-800">
+            <tr key={index} className="bg-white">
               <td className="px-6 py-4">{item.id}</td>
               <td className="px-6 py-4">{item.affected[0].package.name}</td>
               <td className="px-6 py-4">
